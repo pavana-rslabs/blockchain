@@ -8,9 +8,10 @@ import "./DappToken.sol";
 
 contract TokenFarm {
   string public name = "Dapp Token Farm";
+  address public owner;
   DappToken public dappToken;
   DaiToken public daiToken;
-  address public owner;
+  
 
   address[] public stakers;
   mapping(address => uint) public stakingBalance;
@@ -64,7 +65,7 @@ contract TokenFarm {
   //3. Issuing tokens
   function issueTokens() public {
   	 // Only owner can call this function
-        require(msg.sender == owner, "caller must be the owner");
+      require(msg.sender == owner, "caller must be the owner");
   		for( uint i=0; i<stakers.length; i++) {
   		address recipient = stakers[i];
   		uint balance = stakingBalance[recipient];
@@ -77,3 +78,6 @@ contract TokenFarm {
 }
 
 }
+
+
+
